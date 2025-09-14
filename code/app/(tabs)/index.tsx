@@ -98,20 +98,23 @@
 // });
 
 import { View, Text, Button, StyleSheet } from "react-native";
-import {useRouter} from "expo-router";
+import { Link } from "expo-router";
 
 export default function HomeScreen() {
-  const router = useRouter();
+  // const router = useRouter();
   return (
     <View style={styles.container}>
       <Text style={styles.title}>🍔 Recipe App</Text>
       <Text style={styles.para}>Welcome to the Home Screen</Text>
       <Text style={styles.para}>Here you&apos;ll see a list of recipes soon...</Text>
 
+<Link href="/recipe" style={styles.link}>
+        View Pasta Recipe
+      </Link>
        {/* Button to go to Favorites */}
-      <Button title="Go to Favorites" onPress={() => router.push("/favorites")} />
+      {/* <Button title="Go to Favorites" onPress={() => router.push("/favorites")} /> */}
       {/* Button to go to Profile */}
-      <Button title="Go to Profile" onPress={() => router.push("/profile")} />
+      {/* <Button title="Go to Profile" onPress={() => router.push("/profile")} /> */}
     </View>
   );
 }
@@ -131,5 +134,11 @@ const styles = StyleSheet.create({
   },
   para:{
     color: "#fff",
-  }
+  },
+  link: {
+    fontSize: 18,
+    color: "#f8e620ff",
+    textDecorationLine: "underline",
+  },
+
 });
