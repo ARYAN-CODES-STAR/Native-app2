@@ -1,35 +1,28 @@
-import { Text, FlatList, TouchableOpacity, StyleSheet } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { Link } from "expo-router";
-
-const recipes = [
-  { id: "1", title: "Spaghetti Carbonara" },
-  { id: "2", title: "Chicken Curry" },
-  { id: "3", title: "Paneer Butter Masala" },
-];
+import { useColorScheme, Text, View, StyleSheet } from "react-native";
 
 export default function HomeScreen() {
+  const scheme = useColorScheme();
+
   return (
-    <SafeAreaView style={styles.container}>
-      <Text style={styles.heading}>🍲 Recipe List</Text>
-      <FlatList
-        data={recipes}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <Link href={`/recipe/${item.id}`} asChild>
-            <TouchableOpacity style={styles.card}>
-              <Text style={styles.cardText}>{item.title}</Text>
-            </TouchableOpacity>
-          </Link>
-        )}
-      />
-    </SafeAreaView>
+    <View
+      style={[
+        styles.container,
+        scheme === "dark" ? styles.darkContainer : styles.lightContainer,
+      ]}
+    >
+      <Text
+        style={scheme === "dark" ? styles.darkText : styles.lightText}
+      >
+        Welcome to Recipe App ({scheme} mode)
+      </Text>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 20, backgroundColor: "#fff" },
-  heading: { fontSize: 24, fontWeight: "bold", marginBottom: 20 },
-  card: { padding: 15, marginBottom: 10, backgroundColor: "#f4511e", borderRadius: 8 },
-  cardText: { color: "#fff", fontSize: 18 },
+  container: { flex: 1, alignItems: "center", justifyContent: "center" },
+  lightContainer: { backgroundColor: "#fff" },
+  darkContainer: { backgroundColor: "#121212" },
+  lightText: { color: "#121212", fontSize: 20 },
+  darkText: { color: "#fff", fontSize: 20 },
 });
